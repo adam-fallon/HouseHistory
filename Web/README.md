@@ -11,6 +11,3 @@ A web application that allows a user to create a history of the houses they've l
     ./run.sh
     ```
 3. Go to `http://localhost:8080` in your web browser.
-
-## Roadmap
-- [Roadmap](https://github.com/users/adam-fallon/projects/2/views/1)
