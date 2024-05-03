@@ -7,5 +7,5 @@ IMAGE_NAME="househistory-web"
 IMAGE_TAG="latest"
 
 docker build -t "$IMAGE_NAME:$IMAGE_TAG" .
-docker run --name "$APP_NAME" -d "$IMAGE_NAME:$IMAGE_TAG" -d
+docker rmi $(docker images -qa -f 'dangling=true')
 docker run -d -p 8080:80 "$APP_NAME"
