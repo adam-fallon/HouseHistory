@@ -1,10 +1,6 @@
-# House History Web
+## House History Web
 
-A brief description of your project.
-
-## Prerequisites
-
-- Docker
+A web application that allows a user to create a history of the houses they've lived in.
 
 ## Usage
 
