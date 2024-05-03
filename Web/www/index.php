@@ -7,6 +7,7 @@
 </head>
 <body>
     <h1>House History</h1>
+    <button>Login</button>
     <?php
     echo date('Y-m-d H:i:s');
     ?>
