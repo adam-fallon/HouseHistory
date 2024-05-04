@@ -3,7 +3,7 @@ name: House History API Build and Push
 on:
   pull_request:
     branches:
-      -main
+      - main
     types: [closed]
 
 env:
