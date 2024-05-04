@@ -19,5 +19,5 @@ jobs:
     - name: Build and Push
       working-directory: ${{env.DIR}}
       run: |
-        docker build . -t adamfallon.azurecr.io/househistory-api:${{ github.sha }}
-        docker push adamfallon.azurecr.io/househistory-api:${{ github.sha }}
+        docker build . -t adamfallon.azurecr.io/househistory/househistory-api:${{ github.sha }}
+        docker push adamfallon.azurecr.io/househistory/househistory-api:${{ github.sha }}
