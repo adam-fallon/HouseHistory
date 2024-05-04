@@ -26,5 +26,5 @@ else
 }
 
 
-app.MapGet("/", () => "Hello World!");
+app.MapGet("/", () => "Hello frens!");
 app.Run();

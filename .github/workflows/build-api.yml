@@ -21,3 +21,9 @@ jobs:
       run: |
         docker build . -t adamfallon.azurecr.io/househistory/househistory-api:${{ github.sha }}
         docker push adamfallon.azurecr.io/househistory/househistory-api:${{ github.sha }}
+
+    - uses: azure/webapps-deploy@v2
+      with:
+        app-name: 'househistory-api'
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE_API }}
+        images: 'adamfallon.azurecr.io/househistory/househistory-api:${{ github.sha }}'
