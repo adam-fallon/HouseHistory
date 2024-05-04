@@ -17,5 +17,5 @@ jobs:
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
     - run: |
-        docker build . -t adamfallon.azurecr.io/househistory-api:${{ github.sha }}
+        docker build -f ${{env.DIR}}/Dockerfile -t adamfallon.azurecr.io/househistory-api:${{ github.sha }} .
         docker push adamfallon.azurecr.io/househistory-api:${{ github.sha }}
