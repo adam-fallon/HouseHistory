@@ -1,6 +1,9 @@
 name: House History Web Build and Push
 
-on: [push]
+on:
+  push:
+      branches:
+          -main
 
 env:
     DIR: Web

@@ -1,6 +1,9 @@
 name: House History API Build and Push
 
-on: [push]
+on:
+  push:
+      branches:
+          -main
 
 env:
     DIR: API
