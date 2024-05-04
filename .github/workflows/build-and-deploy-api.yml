@@ -2,9 +2,9 @@ name: House History API Build and Push
 
 on:
   pull_request:
-      branches:
-          -main
-      types: [closed]
+    branches:
+      -main
+    types: [closed]
 
 env:
     DIR: API
