@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    <h1>House History</h1>
+    <h1>House History - Remember Every Home</h1>
     <form action="handler.php" method="post">
         <input type='submit' name='submit' value='Login/Register' class='auth' />
     </form>
