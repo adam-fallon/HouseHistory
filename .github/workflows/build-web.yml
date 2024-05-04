@@ -1,0 +1,21 @@
+name: House History API Build and Push
+
+on: [push]
+
+env:
+    DIR: API
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: azure/docker-login@v1
+      with:
+        login-server: adamfallon.azurecr.io
+        username: ${{ secrets.REGISTRY_USERNAME }}
+        password: ${{ secrets.REGISTRY_PASSWORD }}
+    - run: |
+        docker build . -t adamfallon.azurecr.io/househistory-api:${{ github.sha }}
+        docker push adamfallon.azurecr.io/househistory-api:${{ github.sha }}
