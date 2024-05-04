@@ -1,17 +1,15 @@
 name: House History API Build and Push
 
 on:
-  pull_request:
+  push:
     branches:
       - main
-    types: [closed]
 
 env:
     DIR: API
 
 jobs:
   build:
-    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
 
     steps:
