@@ -3,7 +3,7 @@ version: "3.8"
 services:
   househistory-web:
     container_name: househistory-web
-    image: househistory-web:latest
+    image: househistory-web
     depends_on:
       - househistory-api
     build:
@@ -14,7 +14,7 @@ services:
     
   househistory-api:
     container_name: househistory-api
-    image: househistory-api:latest
+    image: househistory-api
     build:
       context: API
       dockerfile: Dockerfile
