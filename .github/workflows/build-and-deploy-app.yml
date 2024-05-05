@@ -13,12 +13,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - uses: azure/docker-login@v1
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Docker login
+      uses: azure/docker-login@v1
       with:
         login-server: adamfallon.azurecr.io
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
+
+    - name: Login via Az module
+      uses: azure/login@v1
+      with:
+        creds: ${{secrets.AZURE_CREDENTIALS}}
+
     - name: Build and Push
       working-directory: ${{env.DIR}}
       run: |
