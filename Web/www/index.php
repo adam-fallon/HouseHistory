@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    <h1>House History - Do Redeploys work? I hope so!</h1>
+    <h1>House History - Do Redeploys work!</h1>
     <form action="handler.php" method="post">
         <input type='submit' name='submit' value='Login/Register' class='auth' />
     </form>

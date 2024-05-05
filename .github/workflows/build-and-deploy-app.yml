@@ -32,14 +32,14 @@ jobs:
     - name: Build and Push
       working-directory: ${{env.DIR}}
       run: |
-        docker build . -t adamfallon.azurecr.io/househistory/househistory-web:${{ github.sha }}
-        docker push adamfallon.azurecr.io/househistory/househistory-web:${{ github.sha }}
-        docker build . -t adamfallon.azurecr.io/househistory/househistory-api:${{ github.sha }}
-        docker push adamfallon.azurecr.io/househistory/househistory-api:${{ github.sha }}
+        docker build . -t adamfallon.azurecr.io/househistory/househistory-web:latest
+        docker push adamfallon.azurecr.io/househistory/househistory-web:latest
+        docker build . -t adamfallon.azurecr.io/househistory/househistory-api:latest
+        docker push adamfallon.azurecr.io/househistory/househistory-api:latest
     - uses: azure/webapps-deploy@v2
       with:
         app-name: 'househistoryapp'
         images: |-
-          'adamfallon.azurecr.io/househistory/househistory-web:${{ github.sha }}'
-          'adamfallon.azurecr.io/househistory/househistory-api:${{ github.sha }}'
+          'adamfallon.azurecr.io/househistory/househistory-web:latest'
+          'adamfallon.azurecr.io/househistory/househistory-api:latest'
         configuration-file: prod.yml
