@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  househistory-web:
+    container_name: househistory-web
+    image: househistory-web:latest
+    depends_on:
+      - househistory-api
+    build:
+      context: Web
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    
+  househistory-api:
+    container_name: househistory-api
+    image: househistory-api:latest
+    build:
+      context: API
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
