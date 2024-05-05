@@ -1,9 +1,39 @@
+using HouseHistory.Dependencies;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 
 var app = WebApplication.Create(args);
+
+// Logging
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
+
+// Config
+builder
+  .Configuration
+  .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+  .AddJsonFile($"appsettings.{app.Environment.EnvironmentName}.json", optional: true)
+  .AddEnvironmentVariables();
+
+if (app.Environment.IsDevelopment())
+{
+  foreach (var c in builder.Configuration.AsEnumerable())
+  {
+    Console.WriteLine(c.Key + " = " + c.Value);
+  }
+}
+
+
+// Dependencies
+builder
+  .Services
+  .AddControllers();
+
+builder
+  .Services
+  .AddSingleton<ISupabaseService, SupabaseServiceImpl>();
 
 builder.Services.AddEndpointsApiExplorer();
 if (app.Environment.IsDevelopment())
