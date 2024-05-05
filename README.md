@@ -11,6 +11,10 @@ Each project has its own README file with more information.
 ## Prerequisites
 
 - Docker
+- Make sure you authenticate to the Azure Container Registry for househistory.
+```bash
+./az_login.sh
+```
 
 ## Roadmap
 
