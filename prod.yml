@@ -3,7 +3,7 @@ version: "3.8"
 services:
   househistory-web:
     container_name: househistory-web
-    image: adamfallon.azurecr.io/househistory/househistory-web
+    image: adamfallon.azurecr.io/househistory/househistory-web:latest
     depends_on:
       - househistory-api
     build:
@@ -14,7 +14,7 @@ services:
     
   househistory-api:
     container_name: househistory-api
-    image: adamfallon.azurecr.io/househistory/househistory-api
+    image: adamfallon.azurecr.io/househistory/househistory-api:latest
     build:
       context: API
       dockerfile: Dockerfile
