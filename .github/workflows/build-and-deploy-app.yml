@@ -1,4 +1,4 @@
-name: House History API Build and Push
+name: House History Web Build and Push
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - main
 
 env:
-    DIR: API
+    DIR: Web
 
 jobs:
   build:
@@ -22,11 +22,15 @@ jobs:
     - name: Build and Push
       working-directory: ${{env.DIR}}
       run: |
+        docker build . -t adamfallon.azurecr.io/househistory/househistory-web:${{ github.sha }}
+        docker push adamfallon.azurecr.io/househistory/househistory-web:${{ github.sha }}
         docker build . -t adamfallon.azurecr.io/househistory/househistory-api:${{ github.sha }}
         docker push adamfallon.azurecr.io/househistory/househistory-api:${{ github.sha }}
-
     - uses: azure/webapps-deploy@v2
       with:
-        app-name: 'househistoryapi'
-        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE_API }}
-        images: 'adamfallon.azurecr.io/househistory/househistory-api:${{ github.sha }}'
+        app-name: 'househistoryapp'
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+        images: |-
+          'adamfallon.azurecr.io/househistory/househistory-web:${{ github.sha }}'
+          'adamfallon.azurecr.io/househistory/househistory-api:${{ github.sha }}'
+        configuration-file: prod.yml
