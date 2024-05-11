@@ -59,5 +59,6 @@ else
 app.UseRouting();
 app.MapGet("/", () => "Hello frens!");
 app.RegisterAuthRoutes();
+app.RegisterHousesRoutes();
 
 app.Run();
