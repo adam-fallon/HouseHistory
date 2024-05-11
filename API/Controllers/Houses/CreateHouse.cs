@@ -17,19 +17,14 @@ namespace HouseHistory.Routes.Auth
                 {
                     var supabase = builder.ApplicationServices.GetRequiredService<ISupabaseService>();
                     var client = await supabase.GetClient();
-
+                    // TODO: Add RLS
+                    // TODO: Auth user based on headers here.
                     var house = House.Map(createHouseRequest);
-
-                    var query = await client
+                    
+                    var result = await client
                         .From<House>()
-                        .Get();
-                    Console.WriteLine(query);
-
-                    // var result = await client
-                    //     .From<House>()
-                    //     .Insert(house);
-                    // Console.WriteLine(house);
-                    // return result;
+                        .Insert(house);
+                    return result;
                 });
             });
         }

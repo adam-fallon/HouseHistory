@@ -30,7 +30,7 @@ public class SupabaseServiceImpl : ISupabaseService
 
             var options = new Supabase.SupabaseOptions
             {
-                AutoConnectRealtime = true
+                AutoConnectRealtime = false
             };
 
             _client = new Supabase.Client(url, key, options);
