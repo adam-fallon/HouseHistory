@@ -1,7 +1,6 @@
 using HouseHistory.Dependencies;
-using HouseHistory.Models.Requests;
+using HouseHistory.Routes.Auth;
 using Microsoft.OpenApi.Models;
-using Supabase.Gotrue;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
@@ -57,26 +56,8 @@ else
   app = builder.Build();
 }
 
-
+app.UseRouting();
 app.MapGet("/", () => "Hello frens!");
-
-app.MapPost($"/api/v1/auth/signup", async (ISupabaseService supabaseService, SignUpRequest signUpRequest) =>
-{
-  var supabase = app.Services.GetRequiredService<ISupabaseService>();
-  var client = await supabase.GetClient();
-  var options = new SignUpOptions
-  {
-    Data = new Dictionary<string, object>
-    {
-      { "username", signUpRequest.Username }
-    }
-  };
-
-  var result = await client
-    .Auth
-    .SignUp(signUpRequest.Email, signUpRequest.Password, options);
-
-  return result;
-});
+app.RegisterAuthRoutes();
 
 app.Run();
