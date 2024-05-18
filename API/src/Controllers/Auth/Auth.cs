@@ -26,7 +26,7 @@ namespace HouseHistory.Routes.Auth
                     {
                         Data = new Dictionary<string, object>
                         {
-                            { "username", signUpRequest.Username }
+                            { "username", signUpRequest.Username },
                         }
                     };
 
