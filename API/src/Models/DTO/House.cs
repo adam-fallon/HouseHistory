@@ -21,7 +21,7 @@ class House : BaseModel
     public string FirstLine { get; set; }
 
     [Column("secondLine")]
-    public string SecondLine { get; set; }
+    public string? SecondLine { get; set; }
 
     [Column("country")]
     public string Country { get; set; }
