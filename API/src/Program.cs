@@ -1,5 +1,6 @@
 using HouseHistory.Dependencies;
 using HouseHistory.Routes.Auth;
+using HouseHistory.Middleware;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -42,6 +43,27 @@ if (app.Environment.IsDevelopment())
   builder.Services.AddSwaggerGen(c =>
     {
       c.SwaggerDoc("v1", new OpenApiInfo { Title = "House History API", Description = "Keep track of your houses", Version = "v1" });
+      c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+      {
+        In = ParameterLocation.Header,
+        Description = "Please insert JWT with Bearer into field",
+        Name = "Authorization",
+        Type = SecuritySchemeType.ApiKey
+      });
+      c.OperationFilter<CustomHeaderSwaggerAttribute>();
+      c.AddSecurityRequirement(new OpenApiSecurityRequirement {
+   {
+     new OpenApiSecurityScheme
+     {
+       Reference = new OpenApiReference
+       {
+         Type = ReferenceType.SecurityScheme,
+         Id = "Bearer"
+       }
+      },
+      new string[] { }
+    }
+  });
     });
 
   app = builder.Build();
@@ -57,6 +79,16 @@ else
 }
 
 app.UseRouting();
+
+app.UseWhen(
+    context => !context.Request.Path.StartsWithSegments("/api/v1/auth"),
+    app =>
+    {
+      app.UseSupabaseSession();
+    }
+);
+
+
 app.MapGet("/", () => "Hello frens!");
 app.RegisterAuthRoutes();
 app.RegisterHousesRoutes();

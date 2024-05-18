@@ -13,14 +13,19 @@ namespace HouseHistory.Routes.Auth
             {
 
 
-                endpoints.MapPost($"/api/v1/houses", async (ISupabaseService supabaseService, CreateHouseRequest createHouseRequest) =>
+                endpoints.MapPost($"/api/v1/houses", async (HttpContext context, ISupabaseService supabaseService, CreateHouseRequest createHouseRequest) =>
                 {
                     var supabase = builder.ApplicationServices.GetRequiredService<ISupabaseService>();
                     var client = await supabase.GetClient();
-                    // TODO: Add RLS
-                    // TODO: Auth user based on headers here.
+
+                    Console.WriteLine(createHouseRequest);
+                    var accessToken = context.Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
+                    var refreshToken = context.Request.Headers["X-RefreshToken"].ToString();
+
+                    var user = await client.Auth.SetSession(accessToken, refreshToken);
+
                     var house = House.Map(createHouseRequest);
-                    
+
                     var result = await client
                         .From<House>()
                         .Insert(house);
